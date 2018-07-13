@@ -12,10 +12,14 @@ You can quickly install and try [lastpage from nuget.org](https://www.nuget.org/
 
 ```console
 dotnet tool install -g lastpage
-dotnetsay
+mkdir build
+mkdir live
+lastpage
 ```
 
 > Note: You may need to open a new command/terminal window the first time you install a tool.
+
+> Note 2: **Running the code above will yield a crash**, as it can't find a few files it's looking for. See more info below. (And a nicer OOBE later.)
 
 You can uninstall the tool using the following command:
 
@@ -29,7 +33,7 @@ The main ingredients are as follows:
 
 The **skeleton** is the... well... the skeleton 😊 of the site, usually containing the html, head and body tags - scripts, styles etc...
 
-**Partials** are common parts that can be inserted into the skeleton or pages - think menus, or a social share widget.
+**Partials** are common parts that can be inserted into the skeleton or pages - think menus, or a social share widget..
 
 **Pages** are what get embedded in the skeleton after being templated - think "index", "news" or "cat gifs 🐱‍👤".
 
@@ -43,6 +47,10 @@ Lastpage uses 4 custom file extensions: .lpc, .lps, .lpl and .lpe.
 **There is a demo setup in the `demo` folder, check it out!**
 
 ## Future features
+
+### Nicer OOBE
+
+Maybe add a default template? But first add error handling 😊.
 
 ### Implementing automatic updates based on file changes
 
