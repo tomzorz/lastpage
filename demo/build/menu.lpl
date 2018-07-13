@@ -1,0 +1,7 @@
+<ul>
+    {{#each menu}}
+    <li>
+        <a href="{{{url}}}.html">{{name}}</a>
+    </li>
+    {{/each}}
+</ul>

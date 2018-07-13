@@ -1,0 +1,25 @@
+{
+    "page_title": "News",
+    "page_header": "Breaking News",
+    "page_content":
+    {
+        "news": [
+            {
+                "title": "foo",
+                "description": "lorem ipsum dolor sit amet"
+            },
+            {
+                "title": "bar",
+                "description": "lorem ipsum dolor sit amet",
+                "image": {
+                    "url": "http://placehold.it/400/300",
+                    "alt": "image alt text"
+                }
+            },
+            {
+                "title": "foobar",
+                "description": "lorem ipsum dolor sit amet"
+            }
+        ]
+    }
+}

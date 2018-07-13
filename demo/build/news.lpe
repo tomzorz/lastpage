@@ -1,0 +1,12 @@
+<h3>news</h3>
+<ul>
+    {{#each news}}
+    <li>
+        <h2>{{title}}</h2>
+        <p>{{description}}</p>
+        {{#image}}
+        <img src="{{{url}}}" alt="{{alt}}">
+        {{/image}}
+    </li>
+    {{/each}}
+</ul>

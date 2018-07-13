@@ -1,0 +1,21 @@
+body {
+    margin: 0 auto;
+    max-width: 56em;
+    padding: 1em 0;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 150px auto;
+    grid-template-rows: repeat(3, auto);
+    grid-gap: 1em;
+}
+
+header, aside, article, footer {
+    background: #eaeaea;
+    padding: 1em;
+}
+
+header, footer {
+    grid-column: 1 / 4;
+}

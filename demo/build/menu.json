@@ -1,0 +1,16 @@
+{
+    "menu": [
+        {
+            "name": "home",
+            "url": "index"
+        },
+        {
+            "name": "news",
+            "url": "news"
+        },
+        {
+            "name": "impressum",
+            "url": "impressum"
+        }
+    ]
+}
