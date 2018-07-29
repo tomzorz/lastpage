@@ -64,8 +64,16 @@ namespace lastpage
             // TODO filesystemwatcher maybe?
             // if ^ uncomment defer lines
 
-            await BuildAsync();
-            Log("Preliminary build complete!", LogLevel.Information);
+            var b = await BuildAsyncWrapper();
+            if (b)
+            {
+                Log("Preliminary build complete!", LogLevel.Information);                
+            }
+            else
+            {
+                Log("Failed initial build!", LogLevel.Error);                
+                return;
+            }
 
             Console.WriteLine("Press...");
             Console.WriteLine(" [ESC] to quit");
@@ -88,12 +96,32 @@ namespace lastpage
                     //    Build();
                     //    break;
                     case ConsoleKey.F:
-                        await BuildAsync();
+                        await BuildAsyncWrapper();
                         break;
                     // nothing to do
                 }
             }
             // ReSharper disable once FunctionNeverReturns
+        }
+
+        private static async Task<bool> BuildAsyncWrapper()
+        {
+            try
+            {
+                await BuildAsync();
+                return true;
+            }
+            catch (FileNotFoundException fne)
+            {
+                Log($"Build failed!", LogLevel.Error);
+                Log($"Missing file: {fne.FileName}", LogLevel.Error);
+            }
+            catch (Exception e)
+            {
+                Log("Build failed!", LogLevel.Error);
+                Log($"Exception: {e}", LogLevel.Error);
+            }
+            return false;
         }
 
         private static async Task BuildAsync()
