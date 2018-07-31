@@ -57,6 +57,12 @@ namespace lastpage
 
         private static async Task Main()
         {
+            /* debug assist */
+#if DEBUG
+            //Directory.SetCurrentDirectory("");
+#endif
+            /* end debug assist */
+
             // read build definition
             _cfg = await GetConfigAsync();
             Log("Loaded build definition!", LogLevel.Information);
@@ -137,11 +143,14 @@ namespace lastpage
 
         private static async Task<bool> BuildAsyncWrapper()
         {
+#if RELEASE
             try
             {
+#endif
                 await BuildAsync();
                 Log("Build completed!", LogLevel.Information);
                 return true;
+#if RELEASE
             }
             catch (FileNotFoundException fne)
             {
@@ -154,6 +163,7 @@ namespace lastpage
                 Log($"Exception: {e}", LogLevel.Error);
             }
             return false;
+#endif
         }
 
         private static async Task BuildAsync()
@@ -202,6 +212,10 @@ namespace lastpage
                 if(file.EndsWith("json") && File.Exists(file.ChangeExtension("json", PartialExtension))) continue;
 
                 var newPath = file.ReplaceFirst(_cfg.sourceFolder, _cfg.targetFolder);
+
+                // ensure the target subfolder exists as well
+                var nfInfo = new FileInfo(newPath);
+                nfInfo.Directory?.Create();
 
                 // check if it's a page we want to template
                 if (file.EndsWith(PageExtension))

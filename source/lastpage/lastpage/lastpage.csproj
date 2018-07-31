@@ -22,11 +22,10 @@
 	<PackageTags>static, website, html, generator, mustachio</PackageTags>
 	<RepositoryUrl>https://github.com/tomzorz/lastpage</RepositoryUrl>
 	<RepositoryType>git</RepositoryType>
-	<Version>0.9.2</Version>
-	<AssemblyVersion>0.9.2.0</AssemblyVersion>
-	<FileVersion>0.9.2.0</FileVersion>
-	<PackageReleaseNotes>- added support for static post-build files
-- better logging</PackageReleaseNotes>
+	<Version>0.9.2.1</Version>
+	<AssemblyVersion>0.9.2.1</AssemblyVersion>
+	<FileVersion>0.9.2.1</FileVersion>
+	<PackageReleaseNotes>- fixed a bug where subfolders in the source folder would crash lastpage</PackageReleaseNotes>
 </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
