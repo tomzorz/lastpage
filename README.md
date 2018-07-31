@@ -46,16 +46,21 @@ Lastpage uses 4 custom file extensions: .lpc, .lps, .lpl and .lpe.
 
 **There is a demo setup in the `demo` folder, check it out!**
 
+Laspage also has the ability to copy additional files into the build folder after post. You might have various reasons to do this:
+
+* some files other than lastpage use the .lp? extensions and it breaks lastpage
+* you have a lot of content that definitely doesn't need templating, so it's faster to skip all the matching logic in lastpage and just bulk copy files
+
 ## Future features
 
 ### Nicer OOBE
 
-Maybe add a default template? But first add error handling 😊.
+Maybe add a default template?
 
 ### Implementing automatic updates based on file changes
 
 This is already seen in some comments in the code, sadly `FileSystemWatcher` needs some taming before primetime in this, causes too many exceptions that can't really be caught.
 
-### Nicer logging
+### Ignore files in config
 
-It's fairly barebones at the moment.
+Add a way to ignore certain .json, .lp? or other files from templating even if lastpage finds a match.

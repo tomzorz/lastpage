@@ -1,4 +1,5 @@
 {
   "sourceFolder": "build",
-  "targetFolder": "live"
+  "targetFolder": "live",
+  "postFolder": "post"
 }
