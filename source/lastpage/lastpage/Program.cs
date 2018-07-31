@@ -75,13 +75,17 @@ namespace lastpage
                 return;
             }
 
-            Console.WriteLine("Press...");
-            Console.WriteLine(" [ESC] to quit");
-            //Console.WriteLine(" [D] to defer updates");
-            Console.WriteLine(" [F] to force regeneration");
             while (true)
             {
+                Console.WriteLine();
+                Console.WriteLine("Press...");
+                Console.WriteLine(" [ESC] to quit");
+                //Console.WriteLine(" [D] to defer updates");
+                Console.WriteLine(" [F] to force regeneration");
+                Console.Write(" > ");
                 var rk = Console.ReadKey();
+                Console.WriteLine();
+
                 // ReSharper disable once SwitchStatementMissingSomeCases
                 switch (rk.Key)
                 {
@@ -100,8 +104,35 @@ namespace lastpage
                         break;
                     // nothing to do
                 }
+                Console.WriteLine();
             }
             // ReSharper disable once FunctionNeverReturns
+        }
+
+        private static void CopyDirectory(string sourceDirName, string destDirName, bool copySubDirs)
+        {
+            // get the subdirectories for the specified directory
+            var dir = new DirectoryInfo(sourceDirName);
+            if (!dir.Exists) throw new DirectoryNotFoundException("Source directory does not exist or could not be found: " + sourceDirName);
+            var dirs = dir.GetDirectories();
+
+            if (!Directory.Exists(destDirName)) Directory.CreateDirectory(destDirName);
+
+            // get the files in the directory and copy them to the new location
+            var files = dir.GetFiles();
+            foreach (var file in files)
+            {
+                var temppath = Path.Combine(destDirName, file.Name);
+                file.CopyTo(temppath, false);
+            }
+
+            // when copying subdirectories, copy them and their contents to new location
+            if (!copySubDirs) return;
+            foreach (var subdir in dirs)
+            {
+                var temppath = Path.Combine(destDirName, subdir.Name);
+                CopyDirectory(subdir.FullName, temppath, true);
+            }
         }
 
         private static async Task<bool> BuildAsyncWrapper()
@@ -109,6 +140,7 @@ namespace lastpage
             try
             {
                 await BuildAsync();
+                Log("Build completed!", LogLevel.Information);
                 return true;
             }
             catch (FileNotFoundException fne)
@@ -203,11 +235,24 @@ namespace lastpage
                     skeleDict[SkeletonContent] = pageContent;
                     var finalContent = skeleTemplate(skeleDict);
                     await File.WriteAllTextAsync(newPath.ChangeExtension(PageExtension, "html"), finalContent);
+                    Log($"Templated {newPath}", LogLevel.Information);
                     continue;
                 }
 
                 //otherwise just simply copy the file
                 File.Copy(file, newPath);
+                Log($"Copied {newPath}", LogLevel.Information);
+            }
+
+            // static post copy
+            if (!string.IsNullOrWhiteSpace(_cfg.postFolder) && new DirectoryInfo(_cfg.postFolder).Exists)
+            {
+                Log("Copying post-build files...", LogLevel.Information);
+                CopyDirectory(_cfg.postFolder, _cfg.targetFolder, true);
+            }
+            else
+            {
+                Log("Post folder not configured or doesn't exist.", LogLevel.Warning);
             }
         }
     }

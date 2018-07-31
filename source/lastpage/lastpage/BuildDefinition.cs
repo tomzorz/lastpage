@@ -18,11 +18,18 @@ namespace lastpage
         /// </summary>
         /// <remarks>Defaults to "live"</remarks>
         public string targetFolder { get; set; }
+
+        /// <summary>
+        /// Source for static post-build content folder relative to the build definition
+        /// </summary>
+        /// <remarks>Defaults to "post"</remarks>
+        public string postFolder { get; set; }
         
         public static BuildDefinition GetDefault => new BuildDefinition
         {
             sourceFolder = "build",
-            targetFolder = "live"
+            targetFolder = "live",
+            postFolder = "post"
         };
     }
 }
