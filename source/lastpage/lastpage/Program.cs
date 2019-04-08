@@ -40,7 +40,7 @@ namespace lastpage
             }
             catch (IOException)
             {
-                Log("Build defition file not found, creating one!", LogLevel.Warning);
+                Log("Build definition file not found, creating one!", LogLevel.Warning);
                 // no build definition exists
                 var cfg = BuildDefinition.GetDefault;
                 await File.WriteAllTextAsync(BuildDefinitionPath, JsonConvert.SerializeObject(cfg, Formatting.Indented));
