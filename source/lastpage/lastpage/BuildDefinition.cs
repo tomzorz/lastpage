@@ -1,5 +1,7 @@
 ﻿// ReSharper disable InconsistentNaming
 
+using lastpage.Features.Articles;
+
 namespace lastpage
 {
     /// <summary>
@@ -24,7 +26,17 @@ namespace lastpage
         /// </summary>
         /// <remarks>Defaults to "post"</remarks>
         public string postFolder { get; set; }
-        
+
+        /// <summary>
+        /// Articles configuration object, add to enable feature
+        /// </summary>
+        public ArticleConfiguration articles { get; set; }
+
+        /// <summary>
+        /// Platform adapter to generate platform specific code, add to enable feature
+        /// </summary>
+        public string platformAdapter { get; set; }
+
         public static BuildDefinition GetDefault => new BuildDefinition
         {
             sourceFolder = "build",

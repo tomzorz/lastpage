@@ -14,13 +14,17 @@ namespace lastpage
     {
         private const string PageExtension = "lpe";
         private const string PartialExtension = "lpl";
+
         private const string PartialPrefix = "_p_";
+
         private const string BuildDefinitionPath = "lastpage-config.lpc";
         private const string SkeletonPath = "skeleton.lps";
+
         private const string PageContentStart = "{{#page_content}}";
         private const string PageContentEnd = "{{/page_content}}";
         private const string PageContent = "page_content";
         private const string SkeletonContent = "content";
+
         private const string PagePrefix = "page_";
 
         //private static bool _defer;
@@ -73,11 +77,11 @@ namespace lastpage
             var b = await BuildAsyncWrapper();
             if (b)
             {
-                Log("Preliminary build complete!", LogLevel.Information);                
+                Log("Preliminary build complete!", LogLevel.Information);
             }
             else
             {
-                Log("Failed initial build!", LogLevel.Error);                
+                Log("Failed initial build!", LogLevel.Error);
                 return;
             }
 
