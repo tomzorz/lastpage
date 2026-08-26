@@ -1,5 +1,7 @@
 # lastpage
 
+> **⚠ Archived.** lastpage is no longer maintained. I built it in 2018 because I needed a tiny static site generator; in 2026 its one and only consumer (my personal site) moved to [Eleventy](https://www.11ty.dev/), which does everything this did and much more. The nuget package is deprecated. The code stays up for reference, but don't build anything new on it.
+
 Lastpage is a .net core static website generator based on [Mustachio](https://github.com/wildbit/mustachio/) which is based on [Mustache](https://mustache.github.io/).
 
 ![](https://img.shields.io/badge/platform-any-green.svg?longCache=true&style=flat-square) ![](https://img.shields.io/badge/nuget-yes-green.svg?longCache=true&style=flat-square) ![](https://img.shields.io/badge/license-MIT-blue.svg?longCache=true&style=flat-square)
